@@ -24,7 +24,7 @@ describe Dessert do
       expect(oreo_cake.ingredients).to be_empty
     end
 
-    it "raises an argument error when given a non-integer quantity"
+    it "raises an argument error when given a non-integer quantity" do
       expect {Dessert.new("blondie", "Wiliam", chef) }.to raise_error(ArgumentError)
     end
   end
@@ -34,7 +34,7 @@ describe Dessert do
       it "adds an ingredient to the ingredients array"
     end
   end
-
+  #couldn't figure out that I had to do the block, this is copied
   describe "#mix!" do
     it "shuffles the ingredient array"
     ingredients = ["chocolate", "flour", "egg", "sugar", "butter"]
@@ -43,21 +43,27 @@ describe Dessert do
       brownie.add_ingredient(ingredient)
     end
 
-    expect(brownie.ingredients).to eq(ingredients)
+    expect(oreo_cake.ingredients).to eq(ingredients)
     brownie.mix!
-    expect(brownie.ingredients).not_to eq(ingredients)
-    expect(brownie.ingredients.sort).to eq(ingredients.sort)
+    expect(oreo_cake.ingredients).not_to eq(ingredients)
+    expect(oreo_cake.ingredients.sort).to eq(ingredients.sort)
   end
 end
 
   describe "#eat" do
-    it "subtracts an amount from the quantity"
+    it "subtracts an amount from the quantity" do
+      oreo_cake.eat(10)
+      expect(oreo_cake.quantity).to eq(10)
+    end
 
-    it "raises an error if the amount is greater than the quantity"
-  end
+
+    it "raises an error if the amount is greater than the quantity" do
+      expect { oreo_cake.eat(10000)}.to raise_error("not enough left!")
+    end
 
   describe "#serve" do
     it "contains the titleized version of the chef's name"
+    #allow(chef).to receive(:titleize).and_return("Chef Denis the Great Baker has made 20 oreo cakes")
   end
 
   describe "#make_more" do
